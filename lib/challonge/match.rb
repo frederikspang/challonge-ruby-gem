@@ -1,7 +1,7 @@
 # the only attributes that will save are: scores_csv, winner_id
 
 class Challonge::Match < Challonge::API
-  self.site = "https://challonge.com/api/tournaments/:tournament_id"
+  self.site = 'https://api.challonge.com/v1/tournaments/:tournament_id'
 
   def tournament
     Challonge::Tournament.find(self.prefix_options[:tournament_id])
@@ -10,16 +10,16 @@ class Challonge::Match < Challonge::API
   def tournament=(tournament)
     self.prefix_options[:tournament_id] = tournament.id
   end
-  
+
   def player1
     _find_player(:player1_id)
   end
-  
+
   def player2
     _find_player(:player2_id)
   end
-  
-  def player_winner? (participant)
+
+  def player_winner?(participant)
     (participant.id != self.winner_id)
   end
 
@@ -29,18 +29,19 @@ class Challonge::Match < Challonge::API
   # not implemented by API
   def destroy; end
 
-  protected
+protected
 
   def readonly_attributes
-    %w/prerequisite_match_ids_csv/
+    %w[prerequisite_match_ids_csv]
   end
-  
-  private
+
+private
+
   def _find_player(player)
-    if self.attributes[player] != nil
-      Challonge::Participant.find(self.attributes[player], :params => {:tournament_id => self.prefix_options[:tournament_id]})
+    if !self.attributes[player].nil?
+      Challonge::Participant.find(self.attributes[player], params: { tournament_id: self.prefix_options[:tournament_id] })
     else
-      Challonge::Participant.new({:name => 'TBD'})
+      Challonge::Participant.new(name: 'TBD')
     end
   end
 end

@@ -1,8 +1,8 @@
-require "rubygems"
-require "rubygems/package_task"
-require "rdoc/task"
+require 'rubygems'
+require 'rubygems/package_task'
+require 'rdoc/task'
 
-task :default => :package do
+task default: :package do
   puts "Don't forget to write some tests!"
 end
 
@@ -12,15 +12,14 @@ end
 #   http://rubygems.org/read/chapter/20
 #
 spec = Gem::Specification.new do |s|
-
   # Change these as appropriate
-  s.name              = "challonge-api"
-  s.version           = "0.2.0"
-  s.summary           = "Preconfigured ActiveResource classes for integrating with CHALLONGE!'s API - http://challonge.com/api"
-  s.author            = "CHALLONGE! LLC"
-  s.email             = "oss@challonge.com"
-  s.homepage          = "http://challonge.com"
-  s.license           = "MIT"
+  s.name              = 'challonge-api'
+  s.version           = '0.3.0'
+  s.summary           = "Preconfigured ActiveResource classes for integrating with CHALLONGE!'s API - https://api.challonge.com/v1"
+  s.author            = 'CHALLONGE! LLC + Frederik Spang Thomsen'
+  s.email             = 'oss@challonge.com'
+  s.homepage          = 'http://challonge.com'
+  s.license           = 'MIT'
 
   s.has_rdoc          = true
   # You should probably have a README of some kind. Change the filename
@@ -29,12 +28,12 @@ spec = Gem::Specification.new do |s|
   # s.rdoc_options      = %w(--main README)
 
   # Add any extra files to include in the gem (like your README)
-  s.files             = %w() + Dir.glob("{lib}/**/*")
-  s.require_paths     = ["lib"]
+  s.files             = %w[] + Dir.glob('{lib}/**/*')
+  s.require_paths     = ['lib']
 
   # If you want to depend on other gems, add them here, along with any
   # relevant versions
-  s.add_dependency("activeresource")
+  s.add_dependency('activeresource')
 
   # If your tests use any gems, include them here
   # s.add_development_dependency("mocha") # for example
@@ -51,7 +50,7 @@ end
 desc "Build the gemspec file #{spec.name}.gemspec"
 task :gemspec do
   file = File.dirname(__FILE__) + "/#{spec.name}.gemspec"
-  File.open(file, "w") {|f| f << spec.to_ruby }
+  File.open(file, 'w') { |f| f << spec.to_ruby }
 end
 
 # If you don't want to generate the .gemspec file, just remove this line. Reasons
@@ -59,15 +58,15 @@ end
 #  - using bundler with a git source
 #  - building the gem without rake (i.e. gem build blah.gemspec)
 #  - maybe others?
-task :package => :gemspec
+task package: :gemspec
 
 # Generate documentation
 Rake::RDocTask.new do |rd|
-  rd.rdoc_files.include("lib/**/*.rb")
-  rd.rdoc_dir = "rdoc"
+  rd.rdoc_files.include('lib/**/*.rb')
+  rd.rdoc_dir = 'rdoc'
 end
 
 desc 'Clear out RDoc and generated packages'
-task :clean => [:clobber_rdoc, :clobber_package] do
+task clean: %i[clobber_rdoc clobber_package] do
   rm "#{spec.name}.gemspec"
 end

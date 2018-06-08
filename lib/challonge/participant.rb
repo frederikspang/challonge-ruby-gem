@@ -1,7 +1,7 @@
 # the only attributes that will save are: name, seed, challonge_username, email, misc
 
 class Challonge::Participant < Challonge::API
-  self.site = "https://challonge.com/api/tournaments/:tournament_id"
+  self.site = 'https://api.challonge.com/v1/tournaments/:tournament_id'
 
   def initialize(attributes = {}, persisted = false)
     @attributes     = {}
@@ -9,7 +9,7 @@ class Challonge::Participant < Challonge::API
     @persisted = persisted
 
     # allow new and create to be passed a tournament or tournament_id
-    real_attributes = attributes.slice!(:tournament, :tournament_id, "tournament", "tournament_id")
+    real_attributes = attributes.slice!(:tournament, :tournament_id, 'tournament', 'tournament_id')
     load(real_attributes)
     attributes.each_pair do |attr, val|
       self.send("#{attr}=", val)
@@ -27,14 +27,14 @@ class Challonge::Participant < Challonge::API
   def randomize!
     validated_post(:randomize)
   end
-  
+
   def name
-    super ? super : @attributes["challonge_username"]
+    super ? super : @attributes['challonge_username']
   end
 
-  protected
+protected
 
   def readonly_attributes
-    %w/challonge_email_address_verified/
+    %w[challonge_email_address_verified]
   end
 end

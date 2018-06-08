@@ -11,11 +11,14 @@ Add ```challonge-api``` to your Gemfile:
 gem 'challonge-api'
 ```
 
-Add challonge-api as a dependency for your project and set your username and API key on startup.
+Add challonge-api as a dependency for your project and set your username and API key on startup. This can go into an initializer, if you're using Rails, or just somewhere in the top of your project.
 
 ```
-Challonge::API.username = 'username'
-Challonge::API.key = '123keyayaonge'
+# config/initializers/challonge.rb
+Challonge.configure do |config|
+  config.api_user = 'username'
+  config.api_key = '123keyayaonge'
+end
 ```
 
 ## Basic Usage

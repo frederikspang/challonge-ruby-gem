@@ -1,10 +1,8 @@
 class Challonge::Tournament < Challonge::API
-  self.site = "https://challonge.com/api"
+  self.site = 'https://api.challonge.com/v1'
 
   def description
-    if self.attributes.include?('description_source')
-      self.description_source
-    end
+    self.description_source if self.attributes.include?('description_source')
   end
 
   def description=(val)
@@ -24,17 +22,17 @@ class Challonge::Tournament < Challonge::API
   end
 
   def participants(scope = :all)
-    Challonge::Participant.find(scope, :params => {:tournament_id => self.id})
+    Challonge::Participant.find(scope, params: { tournament_id: self.id })
   end
 
   def matches(scope = :all)
-    Challonge::Match.find(scope, :params => {:tournament_id => self.id})
+    Challonge::Match.find(scope, params: { tournament_id: self.id })
   end
 
-  protected
+protected
 
   def readonly_attributes
-    %w/description_source subdomain full_challonge_url live_image_url sign_up_url/
+    %w[description_source subdomain full_challonge_url live_image_url sign_up_url]
   end
 
   def writable_attribute_hash

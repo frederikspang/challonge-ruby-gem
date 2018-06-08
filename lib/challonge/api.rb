@@ -1,7 +1,5 @@
-class Challonge
+module Challonge
   class API < ::ActiveResource::Base
-    self.user = 'your_challonge_username'
-    self.password = 'your_challonge_api_key'
     self.format = :json
     self.include_root_in_json = true
 
@@ -23,7 +21,7 @@ class Challonge
       self.password
     end
 
-    protected
+  protected
 
     def validated_post(action)
       post(action)
@@ -34,7 +32,7 @@ class Challonge
     end
 
     def encode
-      {self.class.element_name => writable_attribute_hash}.to_json
+      { self.class.element_name => writable_attribute_hash }.to_json
     end
 
     def readonly_attributes
