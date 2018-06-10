@@ -16,7 +16,7 @@ jobs:
           paths:
             - vendor/bundle
       - run:
-          name: Run rspec in parallel
+          name: Run RSpec
           command: |
             bundle exec rspec --profile 10 \
                               --format progress \
@@ -38,7 +38,7 @@ jobs:
           paths:
             - vendor/bundle
       - run:
-          name: Run rspec in parallel
+          name: Run RSpec
           command: |
             bundle exec rspec --profile 10 \
                               --format progress \
@@ -50,6 +50,12 @@ jobs:
       - image: circleci/ruby:2.5-stretch-node-browsers
     steps:
       - checkout
+      - run:
+          name:  Download cc-test-reporter
+          command: |
+            mkdir -p tmp/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+            chmod +x ./tmp/cc-test-reporter
       - restore_cache:
           key: dependency-cache-{{ checksum "Gemfile.lock" }}
       - run:
@@ -60,11 +66,14 @@ jobs:
           paths:
             - vendor/bundle
       - run:
-          name: Run rspec in parallel
+          name: Run RSpec
           command: |
+            ./tmp/cc-test-reporter before-build
             bundle exec rspec --profile 10 \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/codeclimate.backend.json coverage/backend/.resultset.json
+
 
 workflows:
   version: 2
