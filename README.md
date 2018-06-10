@@ -1,4 +1,4 @@
-# Challonge Ruby Gem
+# Challonge Ruby Gem [![CircleCI](https://circleci.com/gh/frederikspang/challonge-ruby-gem/tree/master.svg?style=svg)](https://circleci.com/gh/frederikspang/challonge-ruby-gem/tree/master) [![Maintainability](https://api.codeclimate.com/v1/badges/7555bacfbbe5cc91ece7/maintainability)](https://codeclimate.com/github/frederikspang/challonge-ruby-gem/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/7555bacfbbe5cc91ece7/test_coverage)](https://codeclimate.com/github/frederikspang/challonge-ruby-gem/test_coverage)
 
 Utilize the CHALLONGE! API with preconfigured ActiveResource classes.
 

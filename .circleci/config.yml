@@ -1,0 +1,75 @@
+version: 2
+jobs:
+  build-2-3:
+    working_directory: ~/challonge-api
+    docker:
+      - image: circleci/ruby:2.3-stretch-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install bundle
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+  build-2-4:
+    working_directory: ~/challonge-api
+    docker:
+      - image: circleci/ruby:2.4-stretch-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install bundle
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+  build-2-5:
+    working_directory: ~/challonge-api
+    docker:
+      - image: circleci/ruby:2.5-stretch-node-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install bundle
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build-2-3
+      - build-2-4
+      - build-2-5
