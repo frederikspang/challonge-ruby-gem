@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["CHALLONGE! LLC + Frederik Spang Thomsen".freeze]
-  s.date = "2018-06-08"
+  s.date = "2018-06-10"
   s.email = "oss@challonge.com".freeze
   s.files = ["lib/challonge".freeze, "lib/challonge-api.rb".freeze, "lib/challonge/api.rb".freeze, "lib/challonge/configuration.rb".freeze, "lib/challonge/match.rb".freeze, "lib/challonge/participant.rb".freeze, "lib/challonge/tournament.rb".freeze]
   s.homepage = "http://challonge.com".freeze
@@ -21,10 +21,13 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activeresource>.freeze, [">= 0"])
+      s.add_development_dependency(%q<rspec>.freeze, ["~> 3.7.0"])
     else
       s.add_dependency(%q<activeresource>.freeze, [">= 0"])
+      s.add_dependency(%q<rspec>.freeze, ["~> 3.7.0"])
     end
   else
     s.add_dependency(%q<activeresource>.freeze, [">= 0"])
+    s.add_dependency(%q<rspec>.freeze, ["~> 3.7.0"])
   end
 end

@@ -32,7 +32,7 @@ Challonge::Tournament.find(:all)
 Get a filtered set of tournaments:
 
 ```
-Challonge::Tournament.find(:all, :params => {:state => 'in_progress'})
+Challonge::Tournament.find(:all, params: { state: 'in_progress' })
 ```
 
 Run a basic tournament from start to finish:
@@ -46,8 +46,8 @@ t.save
 # if save returns false, view validation errors with t.errors.full_messages
 
 # add some participants
-Challonge::Participant.create(:name => 'Joe', :tournament => t)
-Challonge::Participant.create(:name => 'Bob', :tournament => t)
+Challonge::Participant.create(name: 'Joe', tournament: t)
+Challonge::Participant.create(name: 'Bob', tournament: t)
 
 t.start!
 # at this point, t.live_image_url and t.full_challonge_url are available (t.reload to refetch)
