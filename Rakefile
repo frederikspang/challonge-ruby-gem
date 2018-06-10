@@ -37,6 +37,9 @@ spec = Gem::Specification.new do |s|
 
   # If your tests use any gems, include them here
   s.add_development_dependency "rspec", '~> 3.7.0'
+  s.add_development_dependency "rake"
+  s.add_development_dependency "simplecov"
+  s.add_development_dependency "codeclimate-test-reporter", "~> 1.0.0"
 end
 
 # This task actually builds the gem. We also regenerate a static

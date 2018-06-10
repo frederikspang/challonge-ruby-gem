@@ -22,12 +22,21 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activeresource>.freeze, [">= 0"])
       s.add_development_dependency(%q<rspec>.freeze, ["~> 3.7.0"])
+      s.add_development_dependency(%q<rake>.freeze, [">= 0"])
+      s.add_development_dependency(%q<simplecov>.freeze, [">= 0"])
+      s.add_development_dependency(%q<codeclimate-test-reporter>.freeze, ["~> 1.0.0"])
     else
       s.add_dependency(%q<activeresource>.freeze, [">= 0"])
       s.add_dependency(%q<rspec>.freeze, ["~> 3.7.0"])
+      s.add_dependency(%q<rake>.freeze, [">= 0"])
+      s.add_dependency(%q<simplecov>.freeze, [">= 0"])
+      s.add_dependency(%q<codeclimate-test-reporter>.freeze, ["~> 1.0.0"])
     end
   else
     s.add_dependency(%q<activeresource>.freeze, [">= 0"])
     s.add_dependency(%q<rspec>.freeze, ["~> 3.7.0"])
+    s.add_dependency(%q<rake>.freeze, [">= 0"])
+    s.add_dependency(%q<simplecov>.freeze, [">= 0"])
+    s.add_dependency(%q<codeclimate-test-reporter>.freeze, ["~> 1.0.0"])
   end
 end
